@@ -8,7 +8,7 @@ public class ValidityChecker {
         validityChecker(new String[]{"validityCheckNotNull"}, a);
     }
 
-    private static Boolean validityChecker(String[] checks, String data) {
+    private static Boolean validityChecker(String[] checks, String data) { //Maybe redo with enums?
         Boolean valid = true;
         String validityCheck;
         for (String string : checks) {
