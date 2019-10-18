@@ -4,23 +4,37 @@ import java.util.ArrayList;
 
 public class ValidityChecker {
     public static void main(String[] args) {
-        validityCheckSSN("9409308213");
-        Boolean isNotNull = validityCheckNotNull(null);
-        if (isNotNull) {
-            System.out.println("Yay! not null");
-        } else {
-            System.out.println("Null...");
-        }
+        String a = null;
+        validityChecker(new String[]{"validityCheckNotNull"}, a);
     }
 
-    static boolean validityCheckNotNull(String data) {
+    private static Boolean validityChecker(String[] checks, String data) {
+        Boolean valid = true;
+        String validityCheck;
+        for (String string : checks) {
+            validityCheck = string;
+            if (string == "validityCheckNotNull") {
+                valid = validityCheckNotNull(data);
+            } else if (string == "validityCheckSSN") {
+                valid = validityCheckSSN(data);
+            }
+            if (!valid) {
+                System.out.println(data + " did not pass " + validityCheck + ".");
+                return false;
+            }
+        }
+        System.out.println("All validity checks passed!");
+        return true;
+    }
+
+    private static boolean validityCheckNotNull(String data) {
         if (data == null) {
             return false;
         }
         return true;
     }
 
-    static boolean validityCheckSSN(String data) {
+    private static boolean validityCheckSSN(String data) {
         data = data.replaceAll("[^0-9]", "");
         if (!(data.length() == 12 || data.length() == 10)) {
             System.out.println("Length of SSN is weird, yo!");
@@ -59,7 +73,7 @@ public class ValidityChecker {
         return false;
     }
 
-    static Integer handleEvenIndexValues(Integer num) {
+    private static Integer handleEvenIndexValues(Integer num) {
         num*=2;
         if (num > 9) {
             int term1 = num % 10;
